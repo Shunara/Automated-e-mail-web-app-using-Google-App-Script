@@ -30,4 +30,330 @@ function e_mail(email,x,w,y,z){
   return "Your message was sent to this(these) e-mail(s):"+"\n"+emails;
 }
 
-# ===== HTML/CSS/JAVASCRIPT ===
+# HTML/CSS/JAVASCRIPT
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html,body {
+  background-color: yellow;
+  height: 100%;
+  margin: 0px;
+}
+* {
+  box-sizing: border-box;
+}
+.column1 {
+  float: left;
+  width: 48%;
+  padding: 5px;
+  height: 700px;
+  background-color: white;
+}
+.column2 {
+  float: right;
+  width: 48%;
+  padding: 5px;
+  height: 700px;
+  background-color: white;
+}
+.greeting {
+  float: left;
+  width: 25%;
+  padding: 5px;
+  height: 100%;
+}
+.button1 {
+  float: center;
+  width: 98%;
+  height: 10%;
+  display: inline-block;
+  font-size: 16px;
+  color: white;
+  background-color: brown;
+  margin: 1% 1%;
+  cursor: pointer;
+}
+.button2 {
+  float: center;
+  width: 98%;
+  height: 10%;
+  display: inline-block;
+  font-size: 16px;
+  color: white;
+  background-color: red;
+  margin: 1% 1%;
+  cursor: pointer;
+}
+.button3 {
+  float: center;
+  width: 98%;
+  height: 10%;
+  display: inline-block;
+  font-size: 16px;
+  color: white;
+  background-color: darkblue;
+  margin: 1% 1%;
+  cursor: pointer;
+}
+.button4 {
+  float: center;
+  width: 98%;
+  height: 10%;
+  display: inline-block;
+  font-size: 16px;
+  color: white;
+  background-color: darkgreen;
+  margin: 1% 1%;
+  cursor: pointer;
+}
+.button5 {
+  float: center;
+  width: 40%;
+  height: 20%;
+  display: inline-block;
+  font-size: 30px;
+  color: black;
+  background-color: gold;
+  margin: 1% 30%;
+  cursor: pointer;
+}
+.button6 {
+  float: center;
+  width: 40%;
+  height: 20%;
+  display: inline-block;
+  font-size: 30px;
+  color: black;
+  background-color: gold;
+  margin: 2% 30%;
+  cursor: pointer;
+}
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.Preview{
+  color: black;
+  text-align:center;
+  font-size:30px;
+}
+h1 {
+  color: black;
+  text-align: center;
+}
+#text1{
+  color: black;
+  text-align:center;
+  font-size:20px;
+}
+#text2{
+  color: black;
+  text-align:center;
+  font-size:20px;
+}
+#text3{
+  color: brown;
+  text-align:center;
+  font-size:30px;
+}
+#text4{
+  color: red;
+  text-align:center;
+  font-size:30px;
+}
+#text5{
+  color: darkblue;
+  text-align:center;
+  font-size:30px;
+}
+#text6{
+  color: darkgreen;
+  text-align:center;
+  font-size:30px;
+}
+#myCanvas {
+	background-color: white;
+	width:100%;
+	height:500px;
+}
+
+</style>
+</head>
+<body>
+
+<h1>Automated e-mail web app using Google App Script</h1>
+<p id="text1">Paste/type the e-mail address(es) in the box below:</p>
+<br>
+<div style="text-align:center;">
+    <input type="text" id="emails" value="" size=70/>
+</div>
+<p id="text1">Separate each e-mail address with a comma and no spaces, like this: e-mail1,e-mail2,e-mail3...</p>
+<p id="text2">You can personalize your e-mail message before sending it.</p>
+<br>
+<div class="row">
+	<div class="column1"> <p class="Preview">Here's a preview of the e-mail message that will be sent:</p><p id="g"></p><p id="main">My name's Leonardo and I sent you this personalized e-mail using an online automated e-mail sender made in Google
+  App Script. You should check it out! Here's the source code: https://github.com/Shunara/Automated-e-mail-web-app-using-Google-App-Script.</p>
+	</div>
+  <div class="column2">
+    <button class="button5" onclick="SEND_MAIL()"> SEND </button>
+    <div class="row">
+      <div class="greeting">
+        <p id="text3">Greeting</p>
+        <button class="button1" onclick="greet(this)" id="g1">How are you?</button>
+        <button class="button1" onclick="greet(this)" id="g2">How's it going?</button>
+        <button class="button1" onclick="greet(this)" id="g3">Hey!</button>
+        <button class="button1" onclick="greet(this)" id="g4">What's up?</button>
+        <button class="button1" onclick="greet(this)" id="g5">Yo!</button>
+      </div>
+      <div class="greeting">
+        <p id="text4">Alignment</p>
+        <button class="button2" onclick="align(this)" id="a1">Left</button>
+        <button class="button2" onclick="align(this)" id="a2">Right</button>
+        <button class="button2" onclick="align(this)" id="a3">Center</button>
+        <button class="button2" onclick="align(this)" id="a4">Justified</button>
+      </div>
+      <div class="greeting">
+        <p id="text5">Color</p>
+        <button class="button3" onclick="color(this)" id="c1">Blue</button>
+        <button class="button3" onclick="color(this)" id="c2">Red</button>
+        <button class="button3" onclick="color(this)" id="c3">Green</button>
+        <button class="button3" onclick="color(this)" id="c4">Pink</button>
+        <button class="button3" onclick="color(this)" id="c5">Violet</button>
+      </div>
+      <div class="greeting">
+        <p id="text6">Size</p>
+        <button class="button4" onclick="size(this)" id="p1">10px</button>
+        <button class="button4" onclick="size(this)" id="p2">20px</button>
+        <button class="button4" onclick="size(this)" id="p3">30px</button>
+        <button class="button4" onclick="size(this)" id="p4">40px</button>
+        <button class="button4" onclick="size(this)" id="p5">50px</button>
+      </div>
+    </div>
+    <button class="button6" onclick="RANDOM_MAIL()"> RANDOM </button>
+  </div>
+</div>
+
+<!--JAVASCRIPT-->
+<script>
+  //Standard values
+  document.getElementById("g").innerHTML="How are you?";
+  var x="How are you?";
+  document.getElementById("g").style.textAlign="left",
+  document.getElementById("main").style.textAlign="left";
+  var w="left";
+  document.getElementById("g").style.color="blue",
+  document.getElementById("main").style.color="blue";
+  var y="blue";
+  document.getElementById("g").style.fontSize= "20px";
+  document.getElementById("main").style.fontSize= "20px";
+  var z="20px";
+  
+    function greet(elem){
+      x = document.getElementById(elem.id).innerHTML;
+      document.getElementById("g").innerHTML=x;
+    }
+
+    function align(elem){
+      w = document.getElementById(elem.id).innerHTML;
+      if(w=="Left"){
+        document.getElementById("g").style.textAlign="left",
+        document.getElementById("main").style.textAlign="left";
+        w="left";
+      }
+      if(w=="Right"){
+        document.getElementById("g").style.textAlign="right",
+        document.getElementById("main").style.textAlign="right";
+        w="right";
+      }
+      if(w=="Center"){
+        document.getElementById("g").style.textAlign="center",
+        document.getElementById("main").style.textAlign="center";
+        w="center";
+      }
+      if(w=="Justified"){
+        document.getElementById("g").style.textAlign="justify",
+        document.getElementById("main").style.textAlign="justify";
+        w="justify";
+      }
+    }
+
+    function color(elem){
+      y = document.getElementById(elem.id).innerHTML;
+      if(y=="Blue"){
+        document.getElementById("g").style.color="blue",
+        document.getElementById("main").style.color="blue"; 
+        y="blue";
+      }
+      if(y=="Red"){
+        document.getElementById("g").style.color="red",
+        document.getElementById("main").style.color="red";
+        y="red"; 
+      }
+      if(y=="Green"){
+        document.getElementById("g").style.color="green",
+        document.getElementById("main").style.color="green";
+        y="green";
+      }
+      if(y=="Pink"){
+        document.getElementById("g").style.color="#C50DD8",
+        document.getElementById("main").style.color="#C50DD8";
+        y="#C50DD8";
+      }
+      if(y=="Violet"){
+        document.getElementById("g").style.color="#6B0BDF",
+        document.getElementById("main").style.color="#6B0BDF"; 
+        y="#6B0BDF";
+      }
+    }
+
+    function size(elem){
+      z = document.getElementById(elem.id).innerHTML;
+      document.getElementById("g").style.fontSize= z;
+      document.getElementById("main").style.fontSize= z;
+    }
+
+    function RANDOM_MAIL(){
+      let greetings = ["How are you?","How's it going?","Hey!","What's up?","Yo!"];
+      let alingnments = ["left","right","center","justify"];
+      let colors = ["blue","red","green","#C50DD8","#6B0BDF"];
+      let sizes = ["10px","20px","30px","40px","50px"];
+
+      x = greetings[Math.floor(Math.random()*greetings.length)];
+      w = alingnments[Math.floor(Math.random()*alingnments.length)];
+      y = colors[Math.floor(Math.random()*colors.length)];
+      z = sizes[Math.floor(Math.random()*sizes.length)];
+
+      
+      document.getElementById("g").innerHTML=x;
+      document.getElementById("g").style.textAlign=w;
+      document.getElementById("main").style.textAlign=w;
+      document.getElementById("g").style.color=y;
+      document.getElementById("main").style.color=y;
+      document.getElementById("g").style.fontSize=z;
+      document.getElementById("main").style.fontSize=z;
+    }
+    //x,w,y,z,email
+    function SEND_MAIL(){
+      //E-mail(s) list
+      var email = document.getElementById("emails").value;
+
+      //Sending E-mails...
+      document.getElementById("text2").innerHTML = "Sending the message to the e-mail(s)...";
+      
+      //Google App Script Code
+      google.script.run
+    .withSuccessHandler(function (String){
+      alert(String);
+      document.getElementById("text2").innerHTML = "You can personalize your e-mail message before sending it.";
+    }
+    )
+    .withFailureHandler(function(err){
+    console.log(err);
+    })
+    .e_mail(email,x,w,y,z);
+    }
+</script>
+</body>
+</html>
